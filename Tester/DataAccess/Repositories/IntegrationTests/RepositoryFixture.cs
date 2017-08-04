@@ -23,6 +23,8 @@ namespace Tester.DataAccess.Repositories.IntegrationTests
 
                 foreach (var tableName in tableNames)
                 {
+                    // Table names cannot be sent as parameters. The table names are resolved at parse time, since they are needed for planning and such things.
+                    // We need to use string replacement for it. It's not a security issue (or even the risk of becoming one) as long as the table name does not come from a user input.
                     context.Database.ExecuteSqlCommand($"DELETE FROM {tableName}");
                 }
 
